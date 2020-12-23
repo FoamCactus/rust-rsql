@@ -7,19 +7,31 @@ use std::iter::Peekable;
 use std::slice::Iter;
 #[derive(Debug, Clone)]
 pub struct Comparison {
-    first: Selector,
+    selector: Selector,
     comp: ComparisonOperators,
-    second: Value,
+    val: Value,
 }
 
 impl Parseable for Comparison {
     fn parse(input: &mut Peekable<Iter<LexItem>>) -> Result<Self, ParseError> {
         let r = Self {
-            first: Selector::parse(input)?,
+            selector: Selector::parse(input)?,
             comp: ComparisonOperators::parse(input)?,
-            second: Value::parse(input)?,
+            val: Value::parse(input)?,
         };
         Ok(r)
+    }
+}
+
+impl Comparison {
+    fn get_comparison(&self) -> ComparisonOperators {
+        self.comp
+    }
+    fn get_selector(&self) -> Selector {
+        self.selector.clone()
+    }
+    fn get_value(&self) -> Value {
+        self.val.clone()
     }
 }
 
