@@ -24,15 +24,18 @@ impl Parseable for Comparison {
 }
 
 impl Comparison {
-    fn get_comparison(&self) -> ComparisonOperators {
+    pub fn get_comparison(&self) -> ComparisonOperators {
         self.comp
     }
-    fn get_selector(&self) -> Selector {
+
+    pub fn get_selector(&self) -> Selector {
         self.selector.clone()
     }
-    fn get_value(&self) -> Value {
+
+    pub fn get_value(&self) -> Value {
         self.val.clone()
     }
+
 }
 
 
